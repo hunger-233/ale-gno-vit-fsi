@@ -38,7 +38,7 @@ The fluid surrogate predicts velocity and pressure on the moving mesh. The struc
 Clone the project:
 
 ```bash
-git clone https://github.com/<username>/ale-gno-vit-fsi.git
+git clone https://github.com/hunger-233/ale-gno-vit-fsi.git
 cd ale-gno-vit-fsi
 ```
 
