@@ -69,12 +69,6 @@ Training scripts are available under the `scripts` folder.
 Fluid GNO-ViT:
 
 ```bash
-python scripts/train_fluid.py --config fluid_periodic
-```
-
-Non-periodic fluid GNO-ViT:
-
-```bash
 python scripts/train_fluid.py --config fluid_nonperiodic
 ```
 
