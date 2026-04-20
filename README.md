@@ -1,10 +1,10 @@
-# ALE-Consistent Hybrid Graph Neural Operator-Transformer Framework for FSI Prediction
+# An ALE-Consistent Hybrid Graph Neural Operator-Transformer Framework for FSI Prediction
 
 ### Paper
 
 **ALE-Consistent Hybrid Graph Neural Operator-Transformer Framework for Fluid-Structure Interaction Prediction**
 
-by `<Author 1>`, `<Author 2>`, `<Author 3>`
+by `<Shihang Zhao>`, `<Martín Saravia>`, `<Haokui Jiang>`, `<Zhiyang Xue>`, `<Shunxiang Cao>`
 
 This repository contains the official implementation of the ALE-consistent GNO-ViT framework for long-horizon fluid-structure interaction prediction on deforming unstructured meshes.
 
@@ -61,50 +61,11 @@ python -m pip install ipykernel
 python -m ipykernel install --user --name=ale-gno-vit-fsi
 ```
 
-## Dataset
-
-Place the processed Turek-Hron FSI dataset under `Data/TF_fsi2_results_coarse` or update the paths in `configs/fsi_gno_vit.yaml`.
-
-Expected layout:
-
-```text
-Data/TF_fsi2_results_coarse/
-  mesh.h5
-  mu=1.0/
-    x1=-4.0/
-      x2=6.0/
-        Visualization/
-          velocity.h5
-          pressure.h5
-          displacement.h5
-        mask_index_points_boundary_all/
-          mask_index_points_boundary_all.h5
-```
-
-The default config uses the relative paths:
-
-```yaml
-data_location: ../Data/TF_fsi2_results_coarse
-input_mesh_location: ../Data/TF_fsi2_results_coarse/mesh.h5
-boundary_mask_path: ../Data/TF_fsi2_results_coarse/mu=1.0/x1=-4.0/x2=6.0/mask_index_points_boundary_all/mask_index_points_boundary_all.h5
-```
-
-Large datasets and trained checkpoints are not included in this repository. Add public download links here after release:
-
-- Dataset: `<dataset link>`
-- Checkpoints: `<checkpoint link>`
-
 ## Run Training Scripts
 
 Training scripts are available under the `scripts` folder.
 
 Fluid GNO-ViT:
-
-```bash
-python scripts/train_fluid.py --config fluid_periodic
-```
-
-Non-periodic fluid GNO-ViT:
 
 ```bash
 python scripts/train_fluid.py --config fluid_nonperiodic
@@ -148,16 +109,6 @@ python scripts/evaluate_coupled_rollout.py --config coupled_nonperiodic \
   --output results/coupled_rollout_x2_neg2_200step.npz
 ```
 
-The output file contains:
-
-```text
-truth                 # [time, nodes, u/v/p/x/y]
-prediction            # [time, nodes, u/v/p/x/y]
-predicted_boundaries  # [time, boundary_nodes, x/y]
-```
-
-The default non-periodic setting follows the extracted workflow from `FSI_LongTermTrain_nonperiodic_test.ipynb`.
-
 ## Quick Checks
 
 Use these commands to verify that the installation and data paths are working:
@@ -188,29 +139,6 @@ models/           Fluid GNO-ViT/GNO and structure LSTM models
 scripts/          Training and evaluation entry points
 train/            Fluid, structure, and coupled training loops
 docs/             Extraction notes and mapping from notebooks
-```
-
-## Acknowledgement
-
-This project builds on ideas and tools from the neural operator and scientific machine learning community. We thank the authors and maintainers of:
-
-- NeuralOperator
-- PyTorch
-- vit-pytorch
-- meshio
-- gmsh
-
-## Reference
-
-If you find this repository useful for your research, please consider citing:
-
-```bibtex
-@article{your2026ale,
-  title={ALE-Consistent Hybrid Graph Neural Operator-Transformer Framework for Fluid-Structure Interaction Prediction},
-  author={Author, First and Author, Second and Author, Third},
-  journal={arXiv preprint arXiv:xxxx.xxxxx},
-  year={2026}
-}
 ```
 
 ## License
