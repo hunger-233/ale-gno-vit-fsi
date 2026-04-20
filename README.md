@@ -4,7 +4,7 @@
 
 **ALE-Consistent Hybrid Graph Neural Operator-Transformer Framework for Fluid-Structure Interaction Prediction**
 
-by `<Shihang Zhao>`, `<Martín Saravia>`, `<Haokui Jiang>`, `<Zhiyang Xue>`, `<Shunxiang Cao>`
+by `Shihang Zhao`, `Martín Saravia`, `Haokui Jiang`, `Zhiyang Xue`, `Shunxiang Cao`
 
 This repository contains the official implementation of the ALE-consistent GNO-ViT framework for long-horizon fluid-structure interaction prediction on deforming unstructured meshes.
 
