@@ -16,22 +16,6 @@ The framework couples three components:
 
 The fluid surrogate predicts velocity and pressure on the moving mesh. The structural surrogate predicts boundary velocity and displacement. The ALE updater deforms the fluid mesh from the predicted flexible-boundary motion, enabling coupled long-term rollout.
 
-## Representative Results
-
-Non-periodic structural displacement prediction:
-
-![Non-periodic displacement prediction](figs/figure_4_nonperiodic_displacement.png)
-
-Non-periodic flow-field prediction:
-
-![Non-periodic flow-field comparison](figs/figure_5_nonperiodic_flowfield.jpg)
-
-Ablation study on long-horizon rollout stability:
-
-![Rollout R2 comparison](figs/figure_9_r2_rollout.png)
-
-More figures extracted from the paper are available in [`figs/`](figs/README.md).
-
 ## Setup and Tutorials
 
 Clone the project:
