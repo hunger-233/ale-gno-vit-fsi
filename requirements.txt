@@ -1,0 +1,14 @@
+einops>=0.8
+gmsh>=4.12
+h5py>=3.11
+matplotlib>=3.9
+meshio>=5.3
+numpy>=1.26
+ruamel.yaml>=0.18
+scikit-learn>=1.5
+scipy>=1.14
+torch
+tqdm>=4.66
+vit-pytorch>=1.7
+neuraloperator @ git+https://github.com/ashiq24/neuraloperator.git@codano_rep
+

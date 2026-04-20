@@ -1,0 +1,93 @@
+fluid_periodic: &fluid_periodic
+  random_seed: 24
+  nettype: vit
+  grid_type: non uniform
+  equation_dict: {"NS": 3, "ES": 4}
+  n_variables: 7
+  in_dim: 7
+  out_dim: 3
+  n_static_channels: 4
+  input_mesh_location: ../Data/TF_fsi2_results_coarse/mesh.h5
+  data_location: ../Data/TF_fsi2_results_coarse
+  boundary_mask_path: ../Data/TF_fsi2_results_coarse/mu=1.0/x1=-4.0/x2=6.0/mask_index_points_boundary_all/mask_index_points_boundary_all.h5
+  datatype: coarse
+  dt: 1
+  n_input_steps: 1
+  periodic: true
+  sample_per_inlet: 700
+  mu_list: [1.0]
+  supervised_inlets_x1: [-4.0]
+  supervised_inlets_x2_train: [-4.0, 0.0, 2.0, 4.0]
+  supervised_inlets_x2_test: [-2.0, 6.0]
+  batch_size: 1
+  epochs: 300
+  lr: 1.0e-3
+  weight_decay: 0.0
+  scheduler_type: rlp
+  scheduler_step: 5
+  scheduler_gamma: 0.1
+  min_lr: 1.0e-6
+  weight_path: weights
+  weight_saving_interval: 50
+  log_interval: 1
+  boundarymask: true
+  fixed_neighbour: false
+  n_neigbor: 10
+  radius: 0.08
+  gno_mlp_layers: [128]
+  hidden_dim: 256
+  lifting_dim: 256
+  n_layers: 5
+  n_layers_transformer: 7
+  heads: 4
+  grid_size: [250, 40]
+  patch_size: [10, 2]
+
+fluid_nonperiodic:
+  <<: *fluid_periodic
+  periodic: false
+  sample_per_inlet: 0
+  sample_per_inlet_end: 700
+  epochs: 1000
+
+fluid_gno_ablation:
+  <<: *fluid_periodic
+  nettype: gnn
+
+fluid_no_boundary_correction:
+  <<: *fluid_periodic
+  boundarymask: false
+
+structure_periodic: &structure_periodic
+  <<: *fluid_periodic
+  structure_t_in: 10
+  structure_batch_size: 1024
+  structure_hidden_size: 512
+  structure_num_layers: 3
+  structure_dropout: 0.5
+  structure_lr: 1.0e-3
+  structure_epochs: 10000
+  structure_scheduler_step: 100
+  structure_weight_saving_interval: 200
+
+structure_nonperiodic:
+  <<: *structure_periodic
+  periodic: false
+  sample_per_inlet: 0
+  sample_per_inlet_end: 700
+
+coupled_nonperiodic:
+  <<: *structure_periodic
+  periodic: false
+  sample_per_inlet: 0
+  sample_per_inlet_end: 700
+  ale_mesh: square_with_circle_hole.msh
+  ale_alpha: 0.1
+  coupled_rollout_steps: 200
+  coupled_step_start_x2_6: 340
+  coupled_step_start_x2_neg2: 310
+  coupled_train_horizon: 5
+  coupled_epochs: 1000
+  coupled_min_step_start: 100
+  coupled_structure_loss_weight: 5.0
+  results_path: results
