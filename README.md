@@ -12,26 +12,25 @@ This repository contains the official implementation of the ALE-consistent GNO-V
 
 The framework couples three components:
 
-```text
-Fluid state and next mesh
-        |
-        v
-GNO lifting -> ViT latent operator -> GNO projection
-        |
-        v
-Boundary-corrected fluid prediction
-        |
-        v
-Structure LSTM interface predictor
-        |
-        v
-ALE biharmonic mesh update
-        |
-        v
-Autoregressive FSI rollout
-```
+![ALE-consistent GNO-Transformer framework](figs/figure_2_framework.png)
 
 The fluid surrogate predicts velocity and pressure on the moving mesh. The structural surrogate predicts boundary velocity and displacement. The ALE updater deforms the fluid mesh from the predicted flexible-boundary motion, enabling coupled long-term rollout.
+
+## Representative Results
+
+Non-periodic structural displacement prediction:
+
+![Non-periodic displacement prediction](figs/figure_4_nonperiodic_displacement.png)
+
+Non-periodic flow-field prediction:
+
+![Non-periodic flow-field comparison](figs/figure_5_nonperiodic_flowfield.jpg)
+
+Ablation study on long-horizon rollout stability:
+
+![Rollout R2 comparison](figs/figure_9_r2_rollout.png)
+
+More figures extracted from the paper are available in [`figs/`](figs/README.md).
 
 ## Setup and Tutorials
 
@@ -182,6 +181,7 @@ python scripts/rollout_fsi.py \
 ```text
 configs/          Experiment configs
 data_utils/       HDF5 readers, normalization, dataset builders
+figs/             Paper framework and result figures
 layers/           GNO, GNN, transformer, regridding layers
 mesh/             ALE mesh deformation utilities
 models/           Fluid GNO-ViT/GNO and structure LSTM models
